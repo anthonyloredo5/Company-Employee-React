@@ -1,15 +1,8 @@
 //Styles
-import React, { useEffect, useState, } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import Avatar from '@material-ui/core/Avatar';
 import { grey } from '@material-ui/core/colors';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Avatar } from '@material-ui/core';
 import axios from "axios";
 import Search from './Search'
 
@@ -54,6 +47,11 @@ export default function BasicTable() {
     setItems({ ...items, searchTerm: e.target.value, filteredPeople: array });
   }
 
+  var users = items.allPeople;
+  console.log(users, "should be company data in array form");
+  var companies = items.companyData;
+  console.log(companies, "should be company data in array form");
+
   //Changes table row display based on user input
   // var peopleToDisplay = items.allPeople;
   // if( items.filteredPeople.length > 0){
@@ -66,7 +64,42 @@ export default function BasicTable() {
     <div>
       <Search handleState={handleState} />
       <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="simple table">
+        {/* Table container with comparments */}
+        <Table className={classes.table}>
+          <TableHead>
+            <TableRow>
+              <TableCell>Company</TableCell>
+              <TableCell>Employees</TableCell>
+              <TableCell>Employee Id</TableCell>
+              <TableCell>Employee Avatar</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <Fragment>
+              <TableRow>
+                <TableCell rowSpan={users.length + 1}>
+                  {items.companyData.name}<br />
+                  {items.companyData.phoneNumber}
+                </TableCell>
+              </TableRow>
+              {users.map(item => (
+                <TableRow>
+                  <TableCell>
+                    {item.name}
+                  </TableCell>
+                  <TableCell>
+                    {item.id} 
+                  </TableCell>
+                  <TableCell>
+                    <Avatar alt={item.name} src={item.avatar} />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </Fragment>
+          </TableBody>
+        </Table>
+
+        {/* <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>Company Name</TableCell>
@@ -75,28 +108,18 @@ export default function BasicTable() {
               <TableCell align="right">Avatar&nbsp;</TableCell>
             </TableRow>
           </TableHead>
-          {/* {items.allPeople.length > 0 ? ( */}
+          {items.allPeople.length > 0 ? (
           <TableBody>
-            {/* key={items} */}
-            <TableRow >
+            
+            <TableRow key={items}>
               <TableCell  component="th" scope="row">
                 {items.companyData.name}<br />
                 {items.companyData.phoneNumber}
               </TableCell>
               <TableCell align="right">
-                <TableRow align="right">{items.companyData.users[0].name}<br /></TableRow>
-                <TableRow align="right">{items.companyData.users[1].name}<br /></TableRow>
-              </TableCell>
-              <TableCell align="right">
-                <TableRow align="right">{items.companyData.users[0].id}<br /></TableRow>
-                <TableRow align="right">{items.companyData.users[1].id}<br /></TableRow>
-              </TableCell>
-              <TableCell align="right">
-               <Avatar alt={items.companyData.users[0].name} src={items.companyData.users[0].avatar} />
-               <Avatar alt={items.companyData.users[1].name} src={items.companyData.users[1].avatar} />
               </TableCell>
             </TableRow>
-            {/* {peopleToDisplay.map((items) => {
+            {peopleToDisplay.map((items) => {
               return (
                 <TableRow key={items}>
                   <TableCell component="th" scope="row">
@@ -107,10 +130,10 @@ export default function BasicTable() {
                   <TableCell align="right">{items.dob.age}</TableCell>
                 </TableRow>
               );
-            })} */}
+            })}
           </TableBody>
-          {/* ) : ""} */}
-        </Table>
+           ) : ""} 
+        </Table> */}
       </TableContainer>
     </div>
   );
