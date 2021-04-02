@@ -1,23 +1,29 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { grey } from '@material-ui/core/colors';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Avatar, Container, Grid } from '@material-ui/core';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Avatar, Container, Grid, TableRowColumn } from '@material-ui/core';
 import axios from "axios";
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 650,
+    minWidth: 1000,
     backgroundColor: grey,
   },
+  cell: {
+    paddingLeft: "80px",
+  }
 });
 
 export default function BasicTable() {
+
   const classes = useStyles();
+
 
   const [items, setItems] = useState({
     allPeople: [],
     companyData: [],
   });
+
 
   useEffect(function () {
     axios.get("https://6065d7a7b8fbbd001756786c.mockapi.io/companies")
@@ -31,9 +37,9 @@ export default function BasicTable() {
   }, []);
 
 
-  var users = items.allPeople;
   var companies = items.companyData;
   console.log(companies, "should be company data in array form");
+
 
   return (
     <div>
@@ -42,37 +48,47 @@ export default function BasicTable() {
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
-              <TableCell>Company</TableCell>
-              <TableCell>Employees</TableCell>
-              <TableCell>Employee Id</TableCell>
-              <TableCell>Employee Avatar</TableCell>
+              <TableCell>
+                <TableRow>
+                  <TableCell>
+                    Company&nbsp;
+                  </TableCell>
+                  <TableCell className={classes.cell}>
+                    Employees&nbsp;
+                  </TableCell>
+                  <TableCell>
+                    Employee Id&nbsp;
+                  </TableCell>
+                  <TableCell>
+                    Employee Avatar&nbsp;
+                  </TableCell>
+                </TableRow>
+              </TableCell>
             </TableRow>
           </TableHead>
           {companies.map(company => (
             <TableBody>
+              <TableRow>
                 <TableRow>
-                    <Container maxWidth="xl">
-                      <TableRow>
-                        <TableCell rowSpan={company.users.length + 1}>
-                          {company.name}<br />
-                          {company.phoneNumber}
-                        </TableCell>
-                        {company.users.map(user => (
-                          <TableRow>
-                            <TableCell >
-                              {user.name}
-                            </TableCell>
-                            <TableCell >
-                              {user.id}
-                            </TableCell>
-                            <TableCell>
-                              <Avatar alt={user.name} src={user.avatar} />
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                      </TableRow>
-                    </Container>
+                  <TableCell rowSpan={company.users.length + 1}>
+                    {company.name}<br />
+                    {company.phoneNumber}
+                  </TableCell>
+                  {company.users.map(user => (
+                    <TableRow>
+                      <TableCell >
+                        {user.name}
+                      </TableCell>
+                      <TableCell >
+                        {user.id}
+                      </TableCell>
+                      <TableCell>
+                        <Avatar alt={user.name} src={user.avatar} />
+                      </TableCell>
+                    </TableRow>
+                  ))}
                 </TableRow>
+              </TableRow>
             </TableBody>
           ))}
         </Table>
