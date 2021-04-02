@@ -1,0 +1,12 @@
+.header {
+    padding: 5px;
+    text-align: center;
+    background: #1abc9c;
+    color: white;
+    font-size: 20px;
+  }
+.img{
+    max-width: 5%;  
+    height: auto;  
+    text-align: left
+}
