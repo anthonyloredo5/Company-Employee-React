@@ -50,15 +50,15 @@ export default function BasicTable() {
             <TableRow>
               <TableCell>Company&nbsp;</TableCell>
               <Grid
-                  container
-                  direction="row"
-                  justify="flex-end"
-                  alignItems="center"
-                >
+                container
+                direction="row"
+                justify="flex-end"
+                alignItems="center"
+              >
                 <TableCell>Employee&nbsp;</TableCell>
                 <TableCell>Employee Id&nbsp;</TableCell>
                 <TableCell>Employee Avatar&nbsp;</TableCell>
-                </Grid>
+              </Grid>
             </TableRow>
           </TableHead>
           {companies.map(company => (
@@ -70,22 +70,22 @@ export default function BasicTable() {
                 </TableCell>
                 {company.users.map(user => (
                   <Grid
-                  container
-                  direction="row"
-                  justify="flex-end"
-                  alignItems="center"
-                >
-                  <TableRow>
-                    <TableCell felx-end>
-                      {user.name}
-                    </TableCell>
-                    <TableCell className={classes.cell}>
-                      {user.id}
-                    </TableCell>
-                    <TableCell className={classes.cell}>
-                      <Avatar alt={user.name} src={user.avatar} />
-                    </TableCell>
-                  </TableRow>
+                    container
+                    direction="row"
+                    justify="flex-end"
+                    alignItems="center"
+                  >
+                    <TableRow>
+                      <TableCell felx-end>
+                        {user.name}
+                      </TableCell>
+                      <TableCell className={classes.cell}>
+                        {user.id}
+                      </TableCell>
+                      <TableCell className={classes.cell}>
+                        <Avatar alt={user.name} src={user.avatar} />
+                      </TableCell>
+                    </TableRow>
                   </Grid>
                 ))}
               </TableRow>
