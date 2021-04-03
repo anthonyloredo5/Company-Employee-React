@@ -48,46 +48,46 @@ export default function BasicTable() {
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
-              <TableCell>
-                <TableRow>
-                  <TableCell>
-                    Company&nbsp;
-                  </TableCell>
-                  <TableCell className={classes.cell}>
-                    Employees&nbsp;
-                  </TableCell>
-                  <TableCell>
-                    Employee Id&nbsp;
-                  </TableCell>
-                  <TableCell>
-                    Employee Avatar&nbsp;
-                  </TableCell>
-                </TableRow>
-              </TableCell>
+              <TableCell>Company&nbsp;</TableCell>
+              <Grid
+                  container
+                  direction="row"
+                  justify="flex-end"
+                  alignItems="center"
+                >
+                <TableCell>Employee&nbsp;</TableCell>
+                <TableCell>Employee Id&nbsp;</TableCell>
+                <TableCell>Employee Avatar&nbsp;</TableCell>
+                </Grid>
             </TableRow>
           </TableHead>
           {companies.map(company => (
             <TableBody>
               <TableRow>
-                <TableRow>
-                  <TableCell rowSpan={company.users.length + 1}>
-                    {company.name}<br />
-                    {company.phoneNumber}
-                  </TableCell>
-                  {company.users.map(user => (
-                    <TableRow>
-                      <TableCell >
-                        {user.name}
-                      </TableCell>
-                      <TableCell >
-                        {user.id}
-                      </TableCell>
-                      <TableCell>
-                        <Avatar alt={user.name} src={user.avatar} />
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableRow>
+                <TableCell rowSpan={company.users.length + 1}>
+                  {company.name}<br />
+                  {company.phoneNumber}
+                </TableCell>
+                {company.users.map(user => (
+                  <Grid
+                  container
+                  direction="row"
+                  justify="flex-end"
+                  alignItems="center"
+                >
+                  <TableRow>
+                    <TableCell felx-end>
+                      {user.name}
+                    </TableCell>
+                    <TableCell className={classes.cell}>
+                      {user.id}
+                    </TableCell>
+                    <TableCell className={classes.cell}>
+                      <Avatar alt={user.name} src={user.avatar} />
+                    </TableCell>
+                  </TableRow>
+                  </Grid>
+                ))}
               </TableRow>
             </TableBody>
           ))}
